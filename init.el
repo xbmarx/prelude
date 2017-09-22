@@ -141,6 +141,7 @@ by Prelude.")
     '(defun enriched-decode-display-prop (start end &optional param)
        (list start end))))
 
+(global-linum-mode 1)
 (prelude-eval-after-init
  ;; greet the use with some useful tip
  (run-at-time 5 nil 'prelude-tip-of-the-day))

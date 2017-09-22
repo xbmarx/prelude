@@ -56,8 +56,9 @@
 
 ;; select the default value from slime-lisp-implementations
 ;; Tries CCL first on Darwin and Windows but defaults to SBCL
+;; I use SBCL on Linux but have better luck with CCL on Windows
 (cond
- ((and (executable-find "ccl")(eq system-type 'darwin))
+ ((and (executable-find "ccl") (eq system-type 'darwin))
   (setq slime-default-lisp 'ccl))
  ((and (executable-find "wx86cl64")(eq system-type 'windows-nt))
   (setq slime-default-lisp 'win-ccl))
