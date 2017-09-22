@@ -55,13 +55,15 @@
         (sbcl ("sbcl" "--noinform") :coding-system utf-8-unix)))
 
 ;; select the default value from slime-lisp-implementations
-;; Tries CCL first on Darwin and Windows but defaults to SBCL
-;; I use SBCL on Linux but have better luck with CCL on Windows
 (cond
- ((and (executable-find "ccl") (eq system-type 'darwin))
+ ((executable-find "ccl")
   (setq slime-default-lisp 'ccl))
- ((and (executable-find "wx86cl64")(eq system-type 'windows-nt))
+ ((executable-find "wx86cl64")
   (setq slime-default-lisp 'win-ccl))
+ ((executable-find "clisp")
+  (setq slime-default-lisp 'clisp))
+ ((executable-find "cmucl")
+  (setq slime-default-lisp 'cmucl))
  (t (setq slime-default-lisp 'sbcl)))
 
 ;; Add fancy slime contribs

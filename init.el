@@ -142,6 +142,7 @@ by Prelude.")
        (list start end))))
 
 (global-linum-mode 1)
+(global-prettify-symbols-mode 1)
 (prelude-eval-after-init
  ;; greet the use with some useful tip
  (run-at-time 5 nil 'prelude-tip-of-the-day))
