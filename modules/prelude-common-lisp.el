@@ -49,17 +49,19 @@
 ;; argument, M-- M-x slime, you can select a program from that list.
 (setq slime-lisp-implementations
       '((ccl ("ccl"))
+        (win-ccl ("wx86cl64"))
         (clisp ("clisp" "-q"))
         (cmucl ("cmucl" "-quiet"))
         (sbcl ("sbcl" "--noinform") :coding-system utf-8-unix)))
 
 ;; select the default value from slime-lisp-implementations
-(if (and (eq system-type 'darwin)
-         (executable-find "ccl"))
-    ;; default to Clozure CL on OS X
-    (setq slime-default-lisp 'ccl)
-  ;; default to SBCL on Linux and Windows
-  (setq slime-default-lisp 'sbcl))
+;; Tries CCL first on Darwin and Windows but defaults to SBCL
+(cond
+ ((and (executable-find "ccl")(eq system-type 'darwin))
+  (setq slime-default-lisp 'ccl))
+ ((and (executable-find "wx86cl64")(eq system-type 'windows-nt))
+  (setq slime-default-lisp 'win-ccl))
+ (t (setq slime-default-lisp 'sbcl)))
 
 ;; Add fancy slime contribs
 (setq slime-contribs '(slime-fancy slime-cl-indent))
